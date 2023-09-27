@@ -11,7 +11,8 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "{{baseUrl}}/api/4/logout"
+				"url": "{{baseUrl}}/api/4/logout",
+				"description": "Log out; invalidates the related cookie"
 			},
 			"response": []
 		},
@@ -40,7 +41,8 @@
 						}
 					}
 				},
-				"url": "{{baseUrl}}/api/4/login"
+				"url": "{{baseUrl}}/api/4/login",
+				"description": "Login, takes JSON as payload; requires paid subscription, please see [https://schweizmobil.ch/en/switzerlandmobility-plus](https://schweizmobil.ch/en/switzerlandmobility-plus)\n\nProvide account details in response payload."
 			},
 			"response": []
 		},
@@ -49,7 +51,8 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "{{baseUrl}}/api/4/filters"
+				"url": "{{baseUrl}}/api/4/filters",
+				"description": "Users can group their tracks into categories called filters. This endpoint provides the current list of user-defined filters."
 			},
 			"response": []
 		},
@@ -67,7 +70,8 @@
 						}
 					}
 				},
-				"url": "{{baseUrl}}/api/4/filters"
+				"url": "{{baseUrl}}/api/4/filters",
+				"description": "Users can group their tracks into categories called filters. This endpoint adds a filter."
 			},
 			"response": []
 		},
@@ -102,7 +106,8 @@
 							"value": ""
 						}
 					]
-				}
+				},
+				"description": "Users can group their tracks into categories called filters. This endpoint deletes a user-defined filter."
 			},
 			"response": []
 		},
@@ -111,7 +116,8 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "{{baseUrl}}/api/4/check"
+				"url": "{{baseUrl}}/api/4/check",
+				"description": "Used to verify the user is still logged in; also provides account details (similar to login endpoint)"
 			},
 			"response": []
 		},
@@ -120,7 +126,8 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "{{baseUrl}}/api/4/loginConfig"
+				"url": "{{baseUrl}}/api/4/loginConfig",
+				"description": "Provides service-wide notifications for users."
 			},
 			"response": []
 		},
@@ -178,7 +185,8 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "{{baseUrl}}/api/5/tracks"
+				"url": "{{baseUrl}}/api/5/tracks",
+				"description": "List all user-defined tracks."
 			},
 			"response": []
 		},
@@ -303,7 +311,8 @@
 							"value": "854219158"
 						}
 					]
-				}
+				},
+				"description": "Obtain details of a single track\n\nCoordinates are Swiss LV03 coordinates, [https://www.swisstopo.admin.ch/en/knowledge-facts/surveying-geodesy/reference-frames/local/lv03.html](https://www.swisstopo.admin.ch/en/knowledge-facts/surveying-geodesy/reference-frames/local/lv03.html)\n\nSwiss coordinates can be translated to WGS84 or other reference systems using the [swisstopo.admin.ch ](https://www.swisstopo.admin.ch/en/maps-data-online/calculation-services/m2m.html#dokumente_und_publik) REFRAME API described at\n\n[https://www.swisstopo.admin.ch/en/maps-data-online/calculation-services/m2m.html#dokumente_und_publik](https://www.swisstopo.admin.ch/en/maps-data-online/calculation-services/m2m.html#dokumente_und_publik)"
 			},
 			"response": []
 		},
@@ -439,7 +448,8 @@
 							"value": "854219158"
 						}
 					]
-				}
+				},
+				"description": "Reponse is a gpx-formatted XML."
 			},
 			"response": []
 		},
@@ -564,7 +574,8 @@
 							"value": "854219158"
 						}
 					]
-				}
+				},
+				"description": "delete a user-defined track"
 			},
 			"response": []
 		},
@@ -698,7 +709,8 @@
 							"value": "854219158"
 						}
 					]
-				}
+				},
+				"description": "Add a new user-defined track"
 			},
 			"response": []
 		},
@@ -824,7 +836,8 @@
 							"value": "854219158"
 						}
 					]
-				}
+				},
+				"description": "Returns small subset of GET track endpoint."
 			},
 			"response": []
 		},
@@ -1088,7 +1101,8 @@
 							"value": "854219158"
 						}
 					]
-				}
+				},
+				"description": "Returns Points of Interest in the vicinity of a given user-defined track."
 			},
 			"response": []
 		},
@@ -1097,7 +1111,8 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "{{baseUrl}}/api/4/usersettings"
+				"url": "{{baseUrl}}/api/4/usersettings",
+				"description": "Obtain generic settings for the user account."
 			},
 			"response": []
 		},
@@ -1115,7 +1130,8 @@
 						}
 					}
 				},
-				"url": "{{baseUrl}}/api/4/tracks"
+				"url": "{{baseUrl}}/api/4/tracks",
+				"description": "Update an user-defined track."
 			},
 			"response": []
 		},
@@ -1140,7 +1156,8 @@
 							"value": "563360,237360,573600,247600"
 						}
 					]
-				}
+				},
+				"description": "Get user-defined photos in a bbox area.\n\nThe bbox is defined in LV03 coordinates, [https://www.swisstopo.admin.ch/en/knowledge-facts/surveying-geodesy/reference-frames/local/lv03.html](https://www.swisstopo.admin.ch/en/knowledge-facts/surveying-geodesy/reference-frames/local/lv03.html)"
 			},
 			"response": []
 		}
