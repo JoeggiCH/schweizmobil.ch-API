@@ -1,0 +1,1148 @@
+{
+	"info": {
+		"_postman_id": "ad5544a0-005b-4b52-88a2-050bd7e1eadc",
+		"name": "map.schweizmobil.ch",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "29513729"
+	},
+	"item": [
+		{
+			"name": "logout",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{baseUrl}}/api/4/logout"
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authority",
+						"value": "map.schweizmobil.ch",
+						"type": "text"
+					},
+					{
+						"key": "origin",
+						"value": "https://map.schweizmobil.ch",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"{{user}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseUrl}}/api/4/login"
+			},
+			"response": []
+		},
+		{
+			"name": "filters",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{baseUrl}}/api/4/filters"
+			},
+			"response": []
+		},
+		{
+			"name": "filters add",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"hallo test\",\r\n    \"id\": -2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseUrl}}/api/4/filters"
+			},
+			"response": []
+		},
+		{
+			"name": "filters delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"hallo test\",\r\n    \"id\": -2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/4/filters/:filterID",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"4",
+						"filters",
+						":filterID"
+					],
+					"variable": [
+						{
+							"key": "filterID",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{baseUrl}}/api/4/check"
+			},
+			"response": []
+		},
+		{
+			"name": "loginConfig",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{baseUrl}}/api/4/loginConfig"
+			},
+			"response": []
+		},
+		{
+			"name": "tracks",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var template = `",
+							"<style type=\"text/css\">",
+							"    .tftable {font-size:9px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}",
+							"    .tftable th {font-size:9px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}",
+							"    .tftable tr {background-color:#ffffff;}",
+							"    .tftable td {font-size:9px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}",
+							"    .tftable tr:hover {background-color:#e0ffff;}",
+							"</style>",
+							"",
+							"<table class=\"tftable\" border=\"1\">",
+							"    <tr>",
+							"        <th>ID</th>",
+							"        <th>Name</th>",
+							"        <th>Modified At</th>",
+							"        <th>Type</th>",
+							"        <th>TimeType</th>",
+							"        <th>Mins Walking time</th>",
+							"        <th>Mins Cycling time</th>",
+							"    </tr>",
+							"    ",
+							"    {{#each response}}",
+							"        <tr>",
+							"            <td>{{id}}</td>",
+							"            <td>{{name}}</td>",
+							"            <td>{{modified_at}}</td>",
+							"            <td>{{type}}</td>",
+							"            <td>{{timetype}}</td>",
+							"            <td>{{[meta.walking]}}</td>",
+							"            <td>{{[meta.biking]}}</td>",
+							"        </tr>",
+							"    {{/each}}",
+							"</table>",
+							"`;",
+							"",
+							"function constructVisualizerPayload() {",
+							"    return { response: pm.response.json() }",
+							"}",
+							"",
+							"pm.visualizer.set(template, constructVisualizerPayload());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{baseUrl}}/api/5/tracks"
+			},
+			"response": []
+		},
+		{
+			"name": "track",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var template = `",
+							"<style type=\"text/css\">",
+							"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}",
+							"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}",
+							"    .tftable tr {background-color:#ffffff;}",
+							"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}",
+							"    .tftable tr:hover {background-color:#e0ffff;}",
+							"</style>",
+							"",
+							"<table class=\"tftable\" border=\"1\">",
+							"    <tr>",
+							"        <th>Type</th>",
+							"        <th>ID</th>",
+							"        <th>Geometry Type</th>",
+							"        <th>Coordinates</th>",
+							"        <th>Created At</th>",
+							"        <th>Modified At</th>",
+							"        <th>Public</th>",
+							"        <th>Owner</th>",
+							"        <th>Name</th>",
+							"        <th>User Date</th>",
+							"        <th>Imported</th>",
+							"        <th>Original ID</th>",
+							"        <th>Profile</th>",
+							"        <th>Via Points</th>",
+							"        <th>Filter Name</th>",
+							"        <th>Length</th>",
+							"        <th>Total Up</th>",
+							"        <th>Total Down</th>",
+							"        <th>Ele Min</th>",
+							"        <th>Ele Max</th>",
+							"        <th>Walking</th>",
+							"        <th>Winter Hiking</th>",
+							"        <th>Snowshoe Trekking</th>",
+							"        <th>Biking</th>",
+							"        <th>Elevation Models</th>",
+							"        <th>Height Diff</th>",
+							"        <th>GPS Points</th>",
+							"        <th>Opacity</th>",
+							"        <th>Time Type</th>",
+							"        <th>Velospeed</th>",
+							"        <th>Color</th>",
+							"        <th>Color RGB</th>",
+							"        <th>Filter ID</th>",
+							"    </tr>",
+							"    ",
+							"    <tr>",
+							"        <td>{{response.type}}</td>",
+							"        <td>{{response.id}}</td>",
+							"        <td>{{response.geometry.type}}</td>",
+							"        <td></td>",
+							"        <td>{{response.properties.created_at}}</td>",
+							"        <td>{{response.properties.modified_at}}</td>",
+							"        <td>{{response.properties.public}}</td>",
+							"        <td>{{response.properties.owner}}</td>",
+							"        <td>{{response.properties.name}}</td>",
+							"        <td>{{response.properties.userdate}}</td>",
+							"        <td>{{response.properties.imported}}</td>",
+							"        <td>{{response.properties.original_id}}</td>",
+							"        <td></td>",
+							"        <td></td>",
+							"        <td>{{response.properties.filter_name}}</td>",
+							"        <td>{{response.properties.meta.length}}</td>",
+							"        <td>{{response.properties.meta.totalup}}</td>",
+							"        <td>{{response.properties.meta.totaldown}}</td>",
+							"        <td>{{response.properties.meta.elemin}}</td>",
+							"        <td>{{response.properties.meta.elemax}}</td>",
+							"        <td>{{response.properties.meta.walking}}</td>",
+							"        <td>{{response.properties.meta.winter_hiking}}</td>",
+							"        <td>{{response.properties.meta.snowshoe_trekking}}</td>",
+							"        <td>{{response.properties.meta.biking}}</td>",
+							"        <td>{{response.properties.meta.elevationmodels}}</td>",
+							"        <td>{{response.properties.meta.heightdiff}}</td>",
+							"        <td>{{response.properties.gpspoints}}</td>",
+							"        <td>{{response.properties.opacity}}</td>",
+							"        <td>{{response.properties.timetype}}</td>",
+							"        <td>{{response.properties.velospeed}}</td>",
+							"        <td>{{response.properties.color}}</td>",
+							"        <td>{{response.properties.color_rgb}}</td>",
+							"        <td>{{response.properties.filterid}}</td>",
+							"    </tr>",
+							"</table>",
+							"`;",
+							"",
+							"function constructVisualizerPayload() {",
+							"    return {response: pm.response.json()}",
+							"}",
+							"",
+							"pm.visualizer.set(template, constructVisualizerPayload());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/4/tracks/:trackid",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"4",
+						"tracks",
+						":trackid"
+					],
+					"variable": [
+						{
+							"key": "trackid",
+							"value": "854219158"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "track GPS export",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var template = `",
+							"<style type=\"text/css\">",
+							"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}",
+							"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}",
+							"    .tftable tr {background-color:#ffffff;}",
+							"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}",
+							"    .tftable tr:hover {background-color:#e0ffff;}",
+							"</style>",
+							"",
+							"<table class=\"tftable\" border=\"1\">",
+							"    <tr>",
+							"        <th>Type</th>",
+							"        <th>ID</th>",
+							"        <th>Geometry Type</th>",
+							"        <th>Coordinates</th>",
+							"        <th>Created At</th>",
+							"        <th>Modified At</th>",
+							"        <th>Public</th>",
+							"        <th>Owner</th>",
+							"        <th>Name</th>",
+							"        <th>User Date</th>",
+							"        <th>Imported</th>",
+							"        <th>Original ID</th>",
+							"        <th>Profile</th>",
+							"        <th>Via Points</th>",
+							"        <th>Filter Name</th>",
+							"        <th>Length</th>",
+							"        <th>Total Up</th>",
+							"        <th>Total Down</th>",
+							"        <th>Ele Min</th>",
+							"        <th>Ele Max</th>",
+							"        <th>Walking</th>",
+							"        <th>Winter Hiking</th>",
+							"        <th>Snowshoe Trekking</th>",
+							"        <th>Biking</th>",
+							"        <th>Elevation Models</th>",
+							"        <th>Height Diff</th>",
+							"        <th>GPS Points</th>",
+							"        <th>Opacity</th>",
+							"        <th>Time Type</th>",
+							"        <th>Velospeed</th>",
+							"        <th>Color</th>",
+							"        <th>Color RGB</th>",
+							"        <th>Filter ID</th>",
+							"    </tr>",
+							"    ",
+							"    <tr>",
+							"        <td>{{response.type}}</td>",
+							"        <td>{{response.id}}</td>",
+							"        <td>{{response.geometry.type}}</td>",
+							"        <td></td>",
+							"        <td>{{response.properties.created_at}}</td>",
+							"        <td>{{response.properties.modified_at}}</td>",
+							"        <td>{{response.properties.public}}</td>",
+							"        <td>{{response.properties.owner}}</td>",
+							"        <td>{{response.properties.name}}</td>",
+							"        <td>{{response.properties.userdate}}</td>",
+							"        <td>{{response.properties.imported}}</td>",
+							"        <td>{{response.properties.original_id}}</td>",
+							"        <td></td>",
+							"        <td></td>",
+							"        <td>{{response.properties.filter_name}}</td>",
+							"        <td>{{response.properties.meta.length}}</td>",
+							"        <td>{{response.properties.meta.totalup}}</td>",
+							"        <td>{{response.properties.meta.totaldown}}</td>",
+							"        <td>{{response.properties.meta.elemin}}</td>",
+							"        <td>{{response.properties.meta.elemax}}</td>",
+							"        <td>{{response.properties.meta.walking}}</td>",
+							"        <td>{{response.properties.meta.winter_hiking}}</td>",
+							"        <td>{{response.properties.meta.snowshoe_trekking}}</td>",
+							"        <td>{{response.properties.meta.biking}}</td>",
+							"        <td>{{response.properties.meta.elevationmodels}}</td>",
+							"        <td>{{response.properties.meta.heightdiff}}</td>",
+							"        <td>{{response.properties.gpspoints}}</td>",
+							"        <td>{{response.properties.opacity}}</td>",
+							"        <td>{{response.properties.timetype}}</td>",
+							"        <td>{{response.properties.velospeed}}</td>",
+							"        <td>{{response.properties.color}}</td>",
+							"        <td>{{response.properties.color_rgb}}</td>",
+							"        <td>{{response.properties.filterid}}</td>",
+							"    </tr>",
+							"</table>",
+							"`;",
+							"",
+							"function constructVisualizerPayload() {",
+							"    return {response: pm.response.json()}",
+							"}",
+							"",
+							"pm.visualizer.set(template, constructVisualizerPayload());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/4/tracks/:trackid/export_gps?&maxPoints=250",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"4",
+						"tracks",
+						":trackid",
+						"export_gps"
+					],
+					"query": [
+						{
+							"key": null,
+							"value": null
+						},
+						{
+							"key": "maxPoints",
+							"value": "250"
+						}
+					],
+					"variable": [
+						{
+							"key": "trackid",
+							"value": "854219158"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "track delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var template = `",
+							"<style type=\"text/css\">",
+							"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}",
+							"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}",
+							"    .tftable tr {background-color:#ffffff;}",
+							"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}",
+							"    .tftable tr:hover {background-color:#e0ffff;}",
+							"</style>",
+							"",
+							"<table class=\"tftable\" border=\"1\">",
+							"    <tr>",
+							"        <th>Type</th>",
+							"        <th>ID</th>",
+							"        <th>Geometry Type</th>",
+							"        <th>Coordinates</th>",
+							"        <th>Created At</th>",
+							"        <th>Modified At</th>",
+							"        <th>Public</th>",
+							"        <th>Owner</th>",
+							"        <th>Name</th>",
+							"        <th>User Date</th>",
+							"        <th>Imported</th>",
+							"        <th>Original ID</th>",
+							"        <th>Profile</th>",
+							"        <th>Via Points</th>",
+							"        <th>Filter Name</th>",
+							"        <th>Length</th>",
+							"        <th>Total Up</th>",
+							"        <th>Total Down</th>",
+							"        <th>Ele Min</th>",
+							"        <th>Ele Max</th>",
+							"        <th>Walking</th>",
+							"        <th>Winter Hiking</th>",
+							"        <th>Snowshoe Trekking</th>",
+							"        <th>Biking</th>",
+							"        <th>Elevation Models</th>",
+							"        <th>Height Diff</th>",
+							"        <th>GPS Points</th>",
+							"        <th>Opacity</th>",
+							"        <th>Time Type</th>",
+							"        <th>Velospeed</th>",
+							"        <th>Color</th>",
+							"        <th>Color RGB</th>",
+							"        <th>Filter ID</th>",
+							"    </tr>",
+							"    ",
+							"    <tr>",
+							"        <td>{{response.type}}</td>",
+							"        <td>{{response.id}}</td>",
+							"        <td>{{response.geometry.type}}</td>",
+							"        <td></td>",
+							"        <td>{{response.properties.created_at}}</td>",
+							"        <td>{{response.properties.modified_at}}</td>",
+							"        <td>{{response.properties.public}}</td>",
+							"        <td>{{response.properties.owner}}</td>",
+							"        <td>{{response.properties.name}}</td>",
+							"        <td>{{response.properties.userdate}}</td>",
+							"        <td>{{response.properties.imported}}</td>",
+							"        <td>{{response.properties.original_id}}</td>",
+							"        <td></td>",
+							"        <td></td>",
+							"        <td>{{response.properties.filter_name}}</td>",
+							"        <td>{{response.properties.meta.length}}</td>",
+							"        <td>{{response.properties.meta.totalup}}</td>",
+							"        <td>{{response.properties.meta.totaldown}}</td>",
+							"        <td>{{response.properties.meta.elemin}}</td>",
+							"        <td>{{response.properties.meta.elemax}}</td>",
+							"        <td>{{response.properties.meta.walking}}</td>",
+							"        <td>{{response.properties.meta.winter_hiking}}</td>",
+							"        <td>{{response.properties.meta.snowshoe_trekking}}</td>",
+							"        <td>{{response.properties.meta.biking}}</td>",
+							"        <td>{{response.properties.meta.elevationmodels}}</td>",
+							"        <td>{{response.properties.meta.heightdiff}}</td>",
+							"        <td>{{response.properties.gpspoints}}</td>",
+							"        <td>{{response.properties.opacity}}</td>",
+							"        <td>{{response.properties.timetype}}</td>",
+							"        <td>{{response.properties.velospeed}}</td>",
+							"        <td>{{response.properties.color}}</td>",
+							"        <td>{{response.properties.color_rgb}}</td>",
+							"        <td>{{response.properties.filterid}}</td>",
+							"    </tr>",
+							"</table>",
+							"`;",
+							"",
+							"function constructVisualizerPayload() {",
+							"    return {response: pm.response.json()}",
+							"}",
+							"",
+							"pm.visualizer.set(template, constructVisualizerPayload());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/4/tracks/:trackid",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"4",
+						"tracks",
+						":trackid"
+					],
+					"variable": [
+						{
+							"key": "trackid",
+							"value": "854219158"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "track",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var template = `",
+							"<style type=\"text/css\">",
+							"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}",
+							"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}",
+							"    .tftable tr {background-color:#ffffff;}",
+							"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}",
+							"    .tftable tr:hover {background-color:#e0ffff;}",
+							"</style>",
+							"",
+							"<table class=\"tftable\" border=\"1\">",
+							"    <tr>",
+							"        <th>Type</th>",
+							"        <th>ID</th>",
+							"        <th>Geometry Type</th>",
+							"        <th>Coordinates</th>",
+							"        <th>Created At</th>",
+							"        <th>Modified At</th>",
+							"        <th>Public</th>",
+							"        <th>Owner</th>",
+							"        <th>Name</th>",
+							"        <th>User Date</th>",
+							"        <th>Imported</th>",
+							"        <th>Original ID</th>",
+							"        <th>Profile</th>",
+							"        <th>Via Points</th>",
+							"        <th>Filter Name</th>",
+							"        <th>Length</th>",
+							"        <th>Total Up</th>",
+							"        <th>Total Down</th>",
+							"        <th>Ele Min</th>",
+							"        <th>Ele Max</th>",
+							"        <th>Walking</th>",
+							"        <th>Winter Hiking</th>",
+							"        <th>Snowshoe Trekking</th>",
+							"        <th>Biking</th>",
+							"        <th>Elevation Models</th>",
+							"        <th>Height Diff</th>",
+							"        <th>GPS Points</th>",
+							"        <th>Opacity</th>",
+							"        <th>Time Type</th>",
+							"        <th>Velospeed</th>",
+							"        <th>Color</th>",
+							"        <th>Color RGB</th>",
+							"        <th>Filter ID</th>",
+							"    </tr>",
+							"    ",
+							"    <tr>",
+							"        <td>{{response.type}}</td>",
+							"        <td>{{response.id}}</td>",
+							"        <td>{{response.geometry.type}}</td>",
+							"        <td></td>",
+							"        <td>{{response.properties.created_at}}</td>",
+							"        <td>{{response.properties.modified_at}}</td>",
+							"        <td>{{response.properties.public}}</td>",
+							"        <td>{{response.properties.owner}}</td>",
+							"        <td>{{response.properties.name}}</td>",
+							"        <td>{{response.properties.userdate}}</td>",
+							"        <td>{{response.properties.imported}}</td>",
+							"        <td>{{response.properties.original_id}}</td>",
+							"        <td></td>",
+							"        <td></td>",
+							"        <td>{{response.properties.filter_name}}</td>",
+							"        <td>{{response.properties.meta.length}}</td>",
+							"        <td>{{response.properties.meta.totalup}}</td>",
+							"        <td>{{response.properties.meta.totaldown}}</td>",
+							"        <td>{{response.properties.meta.elemin}}</td>",
+							"        <td>{{response.properties.meta.elemax}}</td>",
+							"        <td>{{response.properties.meta.walking}}</td>",
+							"        <td>{{response.properties.meta.winter_hiking}}</td>",
+							"        <td>{{response.properties.meta.snowshoe_trekking}}</td>",
+							"        <td>{{response.properties.meta.biking}}</td>",
+							"        <td>{{response.properties.meta.elevationmodels}}</td>",
+							"        <td>{{response.properties.meta.heightdiff}}</td>",
+							"        <td>{{response.properties.gpspoints}}</td>",
+							"        <td>{{response.properties.opacity}}</td>",
+							"        <td>{{response.properties.timetype}}</td>",
+							"        <td>{{response.properties.velospeed}}</td>",
+							"        <td>{{response.properties.color}}</td>",
+							"        <td>{{response.properties.color_rgb}}</td>",
+							"        <td>{{response.properties.filterid}}</td>",
+							"    </tr>",
+							"</table>",
+							"`;",
+							"",
+							"function constructVisualizerPayload() {",
+							"    return {response: pm.response.json()}",
+							"}",
+							"",
+							"pm.visualizer.set(template, constructVisualizerPayload());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"FeatureCollection\",\r\n    \"features\": [\r\n        {\r\n            \"type\": \"Feature\",\r\n            \"geometry\": {\r\n                \"type\": \"LineString\",\r\n                \"coordinates\": [\r\n                    [\r\n                        574539.931,\r\n                        242351.774\r\n                    ],\r\n                    [\r\n                        574539.929,\r\n                        242351.329\r\n                    ],\r\n                    [\r\n                        574538.337,\r\n                        242350.224\r\n                    ],\r\n                    [\r\n                        574545.145,\r\n                        242351.307\r\n                    ],\r\n                    [\r\n                        574555.741,\r\n                        242354.596\r\n                    ],\r\n                    [\r\n                        574574.676,\r\n                        242363.409\r\n                    ],\r\n                    [\r\n                        574589.836,\r\n                        242373.462\r\n                    ],\r\n                    [\r\n                        574605.776,\r\n                        242388.848\r\n                    ],\r\n                    [\r\n                        574625.495,\r\n                        242404.328\r\n                    ],\r\n                    [\r\n                        574655.805,\r\n                        242421.987\r\n                    ],\r\n                    [\r\n                        574666.401,\r\n                        242425.277\r\n                    ],\r\n                    [\r\n                        574677.734,\r\n                        242424.117\r\n                    ],\r\n                    [\r\n                        574689.133,\r\n                        242420.733\r\n                    ],\r\n                    [\r\n                        574731.337,\r\n                        242391.645\r\n                    ],\r\n                    [\r\n                        574747.126,\r\n                        242389.465\r\n                    ],\r\n                    [\r\n                        574768.308,\r\n                        242393.71\r\n                    ],\r\n                    [\r\n                        574787.998,\r\n                        242402.521\r\n                    ],\r\n                    [\r\n                        574859.186,\r\n                        242434.571\r\n                    ],\r\n                    [\r\n                        574901.603,\r\n                        242455.404\r\n                    ],\r\n                    [\r\n                        574914.471,\r\n                        242459.797\r\n                    ],\r\n                    [\r\n                        574935.639,\r\n                        242460.819\r\n                    ],\r\n                    [\r\n                        574950.742,\r\n                        242457.419\r\n                    ],\r\n                    [\r\n                        574991.539,\r\n                        242435.01\r\n                    ],\r\n                    [\r\n                        575001.346,\r\n                        242430.522\r\n                    ],\r\n                    [\r\n                        575021.745,\r\n                        242428.212\r\n                    ],\r\n                    [\r\n                        575045.114,\r\n                        242431.448\r\n                    ],\r\n                    [\r\n                        575139.097,\r\n                        242492.202\r\n                    ],\r\n                    [\r\n                        575159.537,\r\n                        242499.899\r\n                    ],\r\n                    [\r\n                        575189.029,\r\n                        242503.11\r\n                    ],\r\n                    [\r\n                        575204.174,\r\n                        242509.718\r\n                    ],\r\n                    [\r\n                        575298.979,\r\n                        242587.148\r\n                    ],\r\n                    [\r\n                        575358.1,\r\n                        242626.926\r\n                    ],\r\n                    [\r\n                        575391.44,\r\n                        242646.8\r\n                    ],\r\n                    [\r\n                        575501.34,\r\n                        242701.934\r\n                    ],\r\n                    [\r\n                        575530.031,\r\n                        242712.933\r\n                    ],\r\n                    [\r\n                        575564.84,\r\n                        242722.796\r\n                    ],\r\n                    [\r\n                        575575.444,\r\n                        242728.311\r\n                    ],\r\n                    [\r\n                        575589.086,\r\n                        242737.149\r\n                    ],\r\n                    [\r\n                        575614.138,\r\n                        242763.729\r\n                    ],\r\n                    [\r\n                        575636.89,\r\n                        242782.536\r\n                    ],\r\n                    [\r\n                        575697.736,\r\n                        242856.777\r\n                    ],\r\n                    [\r\n                        575702.983,\r\n                        242864.538\r\n                    ],\r\n                    [\r\n                        575709.943,\r\n                        242884.523\r\n                    ],\r\n                    [\r\n                        575725.271,\r\n                        242954.504\r\n                    ],\r\n                    [\r\n                        575733.69,\r\n                        242980.041\r\n                    ],\r\n                    [\r\n                        575740.542,\r\n                        242992.243\r\n                    ],\r\n                    [\r\n                        575758.829,\r\n                        243010.068\r\n                    ],\r\n                    [\r\n                        575807.273,\r\n                        243046.448\r\n                    ],\r\n                    [\r\n                        575867.88,\r\n                        243081.779\r\n                    ],\r\n                    [\r\n                        575907.172,\r\n                        243098.296\r\n                    ],\r\n                    [\r\n                        575970.142,\r\n                        243120.276\r\n                    ],\r\n                    [\r\n                        576010.199,\r\n                        243139.014\r\n                    ],\r\n                    [\r\n                        576058.684,\r\n                        243167.724\r\n                    ],\r\n                    [\r\n                        576072.333,\r\n                        243178.787\r\n                    ],\r\n                    [\r\n                        576087.511,\r\n                        243194.291\r\n                    ],\r\n                    [\r\n                        576135.379,\r\n                        243257.471\r\n                    ],\r\n                    [\r\n                        576149.828,\r\n                        243279.649\r\n                    ],\r\n                    [\r\n                        576154.407,\r\n                        243290.749\r\n                    ],\r\n                    [\r\n                        576159.036,\r\n                        243314.078\r\n                    ],\r\n                    [\r\n                        576155.477,\r\n                        243368.572\r\n                    ],\r\n                    [\r\n                        576157.083,\r\n                        243391.913\r\n                    ],\r\n                    [\r\n                        576162.44,\r\n                        243408.569\r\n                    ],\r\n                    [\r\n                        576169.291,\r\n                        243420.771\r\n                    ],\r\n                    [\r\n                        576188.283,\r\n                        243445.266\r\n                    ],\r\n                    [\r\n                        576197.383,\r\n                        243452.901\r\n                    ],\r\n                    [\r\n                        576212.533,\r\n                        243461.734\r\n                    ],\r\n                    [\r\n                        576301.891,\r\n                        243507.071\r\n                    ],\r\n                    [\r\n                        576335.222,\r\n                        243526.839\r\n                    ],\r\n                    [\r\n                        576350.398,\r\n                        243542.344\r\n                    ],\r\n                    [\r\n                        576367.175,\r\n                        243580.078\r\n                    ],\r\n                    [\r\n                        576377.039,\r\n                        243590.045\r\n                    ],\r\n                    [\r\n                        576385.446,\r\n                        243594.57\r\n                    ],\r\n                    [\r\n                        576400.507,\r\n                        243600.069\r\n                    ],\r\n                    [\r\n                        576422.439,\r\n                        243604.317\r\n                    ],\r\n                    [\r\n                        576489.714,\r\n                        243608.496\r\n                    ],\r\n                    [\r\n                        576563.1,\r\n                        243629.329\r\n                    ],\r\n                    [\r\n                        576585.816,\r\n                        243640.469\r\n                    ],\r\n                    [\r\n                        576590.372,\r\n                        243645.898\r\n                    ],\r\n                    [\r\n                        576595.693,\r\n                        243653.771\r\n                    ],\r\n                    [\r\n                        576598.043,\r\n                        243674.775\r\n                    ],\r\n                    [\r\n                        576590.733,\r\n                        243737.066\r\n                    ],\r\n                    [\r\n                        576590.008,\r\n                        243744.963\r\n                    ],\r\n                    [\r\n                        576592.332,\r\n                        243759.296\r\n                    ],\r\n                    [\r\n                        576605.324,\r\n                        243795.935\r\n                    ],\r\n                    [\r\n                        576628.175,\r\n                        243841.429\r\n                    ],\r\n                    [\r\n                        576632.006,\r\n                        243854.867\r\n                    ],\r\n                    [\r\n                        576635.912,\r\n                        243886.983\r\n                    ],\r\n                    [\r\n                        576645.793,\r\n                        243901.397\r\n                    ],\r\n                    [\r\n                        576657.229,\r\n                        243908.023\r\n                    ],\r\n                    [\r\n                        576666.991,\r\n                        243911.32\r\n                    ],\r\n                    [\r\n                        576674.472,\r\n                        243911.29\r\n                    ],\r\n                    [\r\n                        576685.944,\r\n                        243907.91\r\n                    ],\r\n                    [\r\n                        576721.973,\r\n                        243884.419\r\n                    ],\r\n                    [\r\n                        576737.109,\r\n                        243871.018\r\n                    ],\r\n                    [\r\n                        576764.204,\r\n                        243843.116\r\n                    ],\r\n                    [\r\n                        576778.527,\r\n                        243834.165\r\n                    ],\r\n                    [\r\n                        576789.928,\r\n                        243831.896\r\n                    ],\r\n                    [\r\n                        576802.028,\r\n                        243834.073\r\n                    ],\r\n                    [\r\n                        576818.608,\r\n                        243841.79\r\n                    ],\r\n                    [\r\n                        576830.826,\r\n                        243855.084\r\n                    ],\r\n                    [\r\n                        577033.571,\r\n                        244145.589\r\n                    ],\r\n                    [\r\n                        577072.391,\r\n                        244198.805\r\n                    ],\r\n                    [\r\n                        577098.198,\r\n                        244228.724\r\n                    ],\r\n                    [\r\n                        577127.028,\r\n                        244258.632\r\n                    ],\r\n                    [\r\n                        577139.934,\r\n                        244274.147\r\n                    ],\r\n                    [\r\n                        577171.09,\r\n                        244319.611\r\n                    ],\r\n                    [\r\n                        577183.987,\r\n                        244332.903\r\n                    ],\r\n                    [\r\n                        577199.893,\r\n                        244342.848\r\n                    ],\r\n                    [\r\n                        577233.196,\r\n                        244357.173\r\n                    ],\r\n                    [\r\n                        577263.53,\r\n                        244366.062\r\n                    ],\r\n                    [\r\n                        577285.375,\r\n                        244368.091\r\n                    ],\r\n                    [\r\n                        577306.527,\r\n                        244366.898\r\n                    ],\r\n                    [\r\n                        577410.724,\r\n                        244346.485\r\n                    ],\r\n                    [\r\n                        577432.632,\r\n                        244345.29\r\n                    ],\r\n                    [\r\n                        577484.03,\r\n                        244349.541\r\n                    ],\r\n                    [\r\n                        577487.841,\r\n                        244338.408\r\n                    ],\r\n                    [\r\n                        577505.933,\r\n                        244327.221\r\n                    ],\r\n                    [\r\n                        577511.873,\r\n                        244319.416\r\n                    ],\r\n                    [\r\n                        577506.245,\r\n                        244230.491\r\n                    ],\r\n                    [\r\n                        577502.446,\r\n                        244224.947\r\n                    ],\r\n                    [\r\n                        577495.632,\r\n                        244221.637\r\n                    ],\r\n                    [\r\n                        577464.745,\r\n                        244226.202\r\n                    ],\r\n                    [\r\n                        577464.672,\r\n                        244226.981\r\n                    ]\r\n                ]\r\n            },\r\n            \"properties\": {\r\n                \"color\": \"red\",\r\n                \"name\": \"230924 das ist ein neuer Track\",\r\n                \"via_points\": [\r\n                    [\r\n                        574539.931,\r\n                        242351.774\r\n                    ],\r\n                    [\r\n                        577464.672,\r\n                        244226.981\r\n                    ]\r\n                ],\r\n                \"meta\": {\r\n                    \"length\": 4230.3,\r\n                    \"totalup\": 75.19999999999993,\r\n                    \"totaldown\": 149.5,\r\n                    \"elemin\": 689.5,\r\n                    \"elemax\": 812.6,\r\n                    \"walking\": 64.53703089335629,\r\n                    \"winter_hiking\": 80.7,\r\n                    \"snowshoe_trekking\": 96.8,\r\n                    \"biking\": 29.863893935855554,\r\n                    \"elevationmodels\": \"ElevationModel Snapped\",\r\n                    \"heightdiff\": 123.10000000000002\r\n                },\r\n                \"profile\": [\r\n                    [\r\n                        574539.931,\r\n                        242351.774,\r\n                        812.2,\r\n                        0\r\n                    ],\r\n                    [\r\n                        574539.929,\r\n                        242351.329,\r\n                        812.2,\r\n                        0.445\r\n                    ],\r\n                    [\r\n                        574538.337,\r\n                        242350.224,\r\n                        812.6,\r\n                        2.383\r\n                    ],\r\n                    [\r\n                        574545.145,\r\n                        242351.307,\r\n                        812.1,\r\n                        9.276\r\n                    ],\r\n                    [\r\n                        574555.741,\r\n                        242354.596,\r\n                        810.7,\r\n                        20.371\r\n                    ],\r\n                    [\r\n                        574574.676,\r\n                        242363.409,\r\n                        806.5,\r\n                        41.256\r\n                    ],\r\n                    [\r\n                        574589.836,\r\n                        242373.462,\r\n                        803.5,\r\n                        59.447\r\n                    ],\r\n                    [\r\n                        574605.776,\r\n                        242388.848,\r\n                        799.9,\r\n                        81.6\r\n                    ],\r\n                    [\r\n                        574625.495,\r\n                        242404.328,\r\n                        795.3,\r\n                        106.67\r\n                    ],\r\n                    [\r\n                        574655.805,\r\n                        242421.987,\r\n                        788.5,\r\n                        141.749\r\n                    ],\r\n                    [\r\n                        574666.401,\r\n                        242425.277,\r\n                        786,\r\n                        152.845\r\n                    ],\r\n                    [\r\n                        574677.734,\r\n                        242424.117,\r\n                        783.9,\r\n                        164.237\r\n                    ],\r\n                    [\r\n                        574689.133,\r\n                        242420.733,\r\n                        782.1,\r\n                        176.128\r\n                    ],\r\n                    [\r\n                        574731.337,\r\n                        242391.645,\r\n                        776,\r\n                        227.385\r\n                    ],\r\n                    [\r\n                        574747.126,\r\n                        242389.465,\r\n                        773.3,\r\n                        243.323\r\n                    ],\r\n                    [\r\n                        574768.308,\r\n                        242393.71,\r\n                        769.5,\r\n                        264.926\r\n                    ],\r\n                    [\r\n                        574787.998,\r\n                        242402.521,\r\n                        765.3,\r\n                        286.498\r\n                    ],\r\n                    [\r\n                        574859.186,\r\n                        242434.571,\r\n                        750.3,\r\n                        364.568\r\n                    ],\r\n                    [\r\n                        574901.603,\r\n                        242455.404,\r\n                        742.7,\r\n                        411.824\r\n                    ],\r\n                    [\r\n                        574914.471,\r\n                        242459.797,\r\n                        741.3,\r\n                        425.422\r\n                    ],\r\n                    [\r\n                        574935.639,\r\n                        242460.819,\r\n                        738.4,\r\n                        446.615\r\n                    ],\r\n                    [\r\n                        574950.742,\r\n                        242457.419,\r\n                        736.4,\r\n                        462.095\r\n                    ],\r\n                    [\r\n                        574991.539,\r\n                        242435.01,\r\n                        732.1,\r\n                        508.642\r\n                    ],\r\n                    [\r\n                        575001.346,\r\n                        242430.522,\r\n                        731.5,\r\n                        519.427\r\n                    ],\r\n                    [\r\n                        575021.745,\r\n                        242428.212,\r\n                        730.4,\r\n                        539.956\r\n                    ],\r\n                    [\r\n                        575045.114,\r\n                        242431.448,\r\n                        728.3,\r\n                        563.549\r\n                    ],\r\n                    [\r\n                        575139.097,\r\n                        242492.202,\r\n                        724,\r\n                        675.459\r\n                    ],\r\n                    [\r\n                        575159.537,\r\n                        242499.899,\r\n                        723.1,\r\n                        697.3\r\n                    ],\r\n                    [\r\n                        575189.029,\r\n                        242503.11,\r\n                        721.3,\r\n                        726.966\r\n                    ],\r\n                    [\r\n                        575204.174,\r\n                        242509.718,\r\n                        720.2,\r\n                        743.49\r\n                    ],\r\n                    [\r\n                        575298.979,\r\n                        242587.148,\r\n                        711.9,\r\n                        865.896\r\n                    ],\r\n                    [\r\n                        575358.1,\r\n                        242626.926,\r\n                        707.7,\r\n                        937.154\r\n                    ],\r\n                    [\r\n                        575391.44,\r\n                        242646.8,\r\n                        705.5,\r\n                        975.968\r\n                    ],\r\n                    [\r\n                        575501.34,\r\n                        242701.934,\r\n                        698.5,\r\n                        1098.922\r\n                    ],\r\n                    [\r\n                        575530.031,\r\n                        242712.933,\r\n                        696.8,\r\n                        1129.65\r\n                    ],\r\n                    [\r\n                        575564.84,\r\n                        242722.796,\r\n                        694.7,\r\n                        1165.829\r\n                    ],\r\n                    [\r\n                        575575.444,\r\n                        242728.311,\r\n                        694,\r\n                        1177.781\r\n                    ],\r\n                    [\r\n                        575589.086,\r\n                        242737.149,\r\n                        692.8,\r\n                        1194.036\r\n                    ],\r\n                    [\r\n                        575614.138,\r\n                        242763.729,\r\n                        690.6,\r\n                        1230.561\r\n                    ],\r\n                    [\r\n                        575636.89,\r\n                        242782.536,\r\n                        689.5,\r\n                        1260.08\r\n                    ],\r\n                    [\r\n                        575697.736,\r\n                        242856.777,\r\n                        692.2,\r\n                        1356.069\r\n                    ],\r\n                    [\r\n                        575702.983,\r\n                        242864.538,\r\n                        692.4,\r\n                        1365.438\r\n                    ],\r\n                    [\r\n                        575709.943,\r\n                        242884.523,\r\n                        693,\r\n                        1386.599\r\n                    ],\r\n                    [\r\n                        575725.271,\r\n                        242954.504,\r\n                        695,\r\n                        1458.24\r\n                    ],\r\n                    [\r\n                        575733.69,\r\n                        242980.041,\r\n                        695.9,\r\n                        1485.129\r\n                    ],\r\n                    [\r\n                        575740.542,\r\n                        242992.243,\r\n                        696.5,\r\n                        1499.123\r\n                    ],\r\n                    [\r\n                        575758.829,\r\n                        243010.068,\r\n                        697.3,\r\n                        1524.661\r\n                    ],\r\n                    [\r\n                        575807.273,\r\n                        243046.448,\r\n                        699.1,\r\n                        1585.244\r\n                    ],\r\n                    [\r\n                        575867.88,\r\n                        243081.779,\r\n                        701.2,\r\n                        1655.397\r\n                    ],\r\n                    [\r\n                        575907.172,\r\n                        243098.296,\r\n                        702.4,\r\n                        1698.019\r\n                    ],\r\n                    [\r\n                        575970.142,\r\n                        243120.276,\r\n                        704.7,\r\n                        1764.715\r\n                    ],\r\n                    [\r\n                        576010.199,\r\n                        243139.014,\r\n                        705.9,\r\n                        1808.937\r\n                    ],\r\n                    [\r\n                        576058.684,\r\n                        243167.724,\r\n                        707.8,\r\n                        1865.286\r\n                    ],\r\n                    [\r\n                        576072.333,\r\n                        243178.787,\r\n                        708.2,\r\n                        1882.855\r\n                    ],\r\n                    [\r\n                        576087.511,\r\n                        243194.291,\r\n                        708.8,\r\n                        1904.552\r\n                    ],\r\n                    [\r\n                        576135.379,\r\n                        243257.471,\r\n                        710.8,\r\n                        1983.818\r\n                    ],\r\n                    [\r\n                        576149.828,\r\n                        243279.649,\r\n                        711.5,\r\n                        2010.287\r\n                    ],\r\n                    [\r\n                        576154.407,\r\n                        243290.749,\r\n                        711.8,\r\n                        2022.294\r\n                    ],\r\n                    [\r\n                        576159.036,\r\n                        243314.078,\r\n                        712.7,\r\n                        2046.079\r\n                    ],\r\n                    [\r\n                        576155.477,\r\n                        243368.572,\r\n                        714.9,\r\n                        2100.688\r\n                    ],\r\n                    [\r\n                        576157.083,\r\n                        243391.913,\r\n                        715.5,\r\n                        2124.085\r\n                    ],\r\n                    [\r\n                        576162.44,\r\n                        243408.569,\r\n                        716,\r\n                        2141.581\r\n                    ],\r\n                    [\r\n                        576169.291,\r\n                        243420.771,\r\n                        716.5,\r\n                        2155.575\r\n                    ],\r\n                    [\r\n                        576188.283,\r\n                        243445.266,\r\n                        717.4,\r\n                        2186.57\r\n                    ],\r\n                    [\r\n                        576197.383,\r\n                        243452.901,\r\n                        717.9,\r\n                        2198.448\r\n                    ],\r\n                    [\r\n                        576212.533,\r\n                        243461.734,\r\n                        718.3,\r\n                        2215.986\r\n                    ],\r\n                    [\r\n                        576301.891,\r\n                        243507.071,\r\n                        720.3,\r\n                        2316.187\r\n                    ],\r\n                    [\r\n                        576335.222,\r\n                        243526.839,\r\n                        721.2,\r\n                        2354.939\r\n                    ],\r\n                    [\r\n                        576350.398,\r\n                        243542.344,\r\n                        722.1,\r\n                        2376.635\r\n                    ],\r\n                    [\r\n                        576367.175,\r\n                        243580.078,\r\n                        723.4,\r\n                        2417.931\r\n                    ],\r\n                    [\r\n                        576377.039,\r\n                        243590.045,\r\n                        723.8,\r\n                        2431.954\r\n                    ],\r\n                    [\r\n                        576385.446,\r\n                        243594.57,\r\n                        724.1,\r\n                        2441.501\r\n                    ],\r\n                    [\r\n                        576400.507,\r\n                        243600.069,\r\n                        724.7,\r\n                        2457.534\r\n                    ],\r\n                    [\r\n                        576422.439,\r\n                        243604.317,\r\n                        725.2,\r\n                        2479.874\r\n                    ],\r\n                    [\r\n                        576489.714,\r\n                        243608.496,\r\n                        727.3,\r\n                        2547.279\r\n                    ],\r\n                    [\r\n                        576563.1,\r\n                        243629.329,\r\n                        729.9,\r\n                        2623.565\r\n                    ],\r\n                    [\r\n                        576585.816,\r\n                        243640.469,\r\n                        730.6,\r\n                        2648.864\r\n                    ],\r\n                    [\r\n                        576590.372,\r\n                        243645.898,\r\n                        730.8,\r\n                        2655.952\r\n                    ],\r\n                    [\r\n                        576595.693,\r\n                        243653.771,\r\n                        731.2,\r\n                        2665.455\r\n                    ],\r\n                    [\r\n                        576598.043,\r\n                        243674.775,\r\n                        731.9,\r\n                        2686.59\r\n                    ],\r\n                    [\r\n                        576590.733,\r\n                        243737.066,\r\n                        734.2,\r\n                        2749.308\r\n                    ],\r\n                    [\r\n                        576590.008,\r\n                        243744.963,\r\n                        734.5,\r\n                        2757.238\r\n                    ],\r\n                    [\r\n                        576592.332,\r\n                        243759.296,\r\n                        735,\r\n                        2771.758\r\n                    ],\r\n                    [\r\n                        576605.324,\r\n                        243795.935,\r\n                        735.9,\r\n                        2810.632\r\n                    ],\r\n                    [\r\n                        576628.175,\r\n                        243841.429,\r\n                        737.2,\r\n                        2861.543\r\n                    ],\r\n                    [\r\n                        576632.006,\r\n                        243854.867,\r\n                        737.5,\r\n                        2875.516\r\n                    ],\r\n                    [\r\n                        576635.912,\r\n                        243886.983,\r\n                        738.3,\r\n                        2907.869\r\n                    ],\r\n                    [\r\n                        576645.793,\r\n                        243901.397,\r\n                        738.7,\r\n                        2925.345\r\n                    ],\r\n                    [\r\n                        576657.229,\r\n                        243908.023,\r\n                        739.1,\r\n                        2938.562\r\n                    ],\r\n                    [\r\n                        576666.991,\r\n                        243911.32,\r\n                        739.6,\r\n                        2948.865\r\n                    ],\r\n                    [\r\n                        576674.472,\r\n                        243911.29,\r\n                        740,\r\n                        2956.346\r\n                    ],\r\n                    [\r\n                        576685.944,\r\n                        243907.91,\r\n                        740.6,\r\n                        2968.307\r\n                    ],\r\n                    [\r\n                        576721.973,\r\n                        243884.419,\r\n                        741.6,\r\n                        3011.317\r\n                    ],\r\n                    [\r\n                        576737.109,\r\n                        243871.018,\r\n                        742,\r\n                        3031.533\r\n                    ],\r\n                    [\r\n                        576764.204,\r\n                        243843.116,\r\n                        743.3,\r\n                        3070.426\r\n                    ],\r\n                    [\r\n                        576778.527,\r\n                        243834.165,\r\n                        743.7,\r\n                        3087.315\r\n                    ],\r\n                    [\r\n                        576789.928,\r\n                        243831.896,\r\n                        743.9,\r\n                        3098.941\r\n                    ],\r\n                    [\r\n                        576802.028,\r\n                        243834.073,\r\n                        744,\r\n                        3111.234\r\n                    ],\r\n                    [\r\n                        576818.608,\r\n                        243841.79,\r\n                        744.3,\r\n                        3129.522\r\n                    ],\r\n                    [\r\n                        576830.826,\r\n                        243855.084,\r\n                        744.4,\r\n                        3147.578\r\n                    ],\r\n                    [\r\n                        577033.571,\r\n                        244145.589,\r\n                        743.6,\r\n                        3501.836\r\n                    ],\r\n                    [\r\n                        577072.391,\r\n                        244198.805,\r\n                        743.9,\r\n                        3567.707\r\n                    ],\r\n                    [\r\n                        577098.198,\r\n                        244228.724,\r\n                        744,\r\n                        3607.219\r\n                    ],\r\n                    [\r\n                        577127.028,\r\n                        244258.632,\r\n                        742.6,\r\n                        3648.759\r\n                    ],\r\n                    [\r\n                        577139.934,\r\n                        244274.147,\r\n                        741.5,\r\n                        3668.94\r\n                    ],\r\n                    [\r\n                        577171.09,\r\n                        244319.611,\r\n                        738.4,\r\n                        3724.056\r\n                    ],\r\n                    [\r\n                        577183.987,\r\n                        244332.903,\r\n                        737,\r\n                        3742.576\r\n                    ],\r\n                    [\r\n                        577199.893,\r\n                        244342.848,\r\n                        735.9,\r\n                        3761.335\r\n                    ],\r\n                    [\r\n                        577233.196,\r\n                        244357.173,\r\n                        733.7,\r\n                        3797.588\r\n                    ],\r\n                    [\r\n                        577263.53,\r\n                        244366.062,\r\n                        731.7,\r\n                        3829.198\r\n                    ],\r\n                    [\r\n                        577285.375,\r\n                        244368.091,\r\n                        730.3,\r\n                        3851.137\r\n                    ],\r\n                    [\r\n                        577306.527,\r\n                        244366.898,\r\n                        729.2,\r\n                        3872.323\r\n                    ],\r\n                    [\r\n                        577410.724,\r\n                        244346.485,\r\n                        722.8,\r\n                        3978.5\r\n                    ],\r\n                    [\r\n                        577432.632,\r\n                        244345.29,\r\n                        721.6,\r\n                        4000.441\r\n                    ],\r\n                    [\r\n                        577484.03,\r\n                        244349.541,\r\n                        718.4,\r\n                        4052.014\r\n                    ],\r\n                    [\r\n                        577487.841,\r\n                        244338.408,\r\n                        719.1,\r\n                        4063.781\r\n                    ],\r\n                    [\r\n                        577505.933,\r\n                        244327.221,\r\n                        720.7,\r\n                        4085.053\r\n                    ],\r\n                    [\r\n                        577511.873,\r\n                        244319.416,\r\n                        721.7,\r\n                        4094.861\r\n                    ],\r\n                    [\r\n                        577506.245,\r\n                        244230.491,\r\n                        735.3,\r\n                        4183.963\r\n                    ],\r\n                    [\r\n                        577502.446,\r\n                        244224.947,\r\n                        736.2,\r\n                        4190.685\r\n                    ],\r\n                    [\r\n                        577495.632,\r\n                        244221.637,\r\n                        736.9,\r\n                        4198.259\r\n                    ],\r\n                    [\r\n                        577464.745,\r\n                        244226.202,\r\n                        737.9,\r\n                        4229.483\r\n                    ],\r\n                    [\r\n                        577464.672,\r\n                        244226.981,\r\n                        737.9,\r\n                        4230.265\r\n                    ]\r\n                ],\r\n                \"velospeed\": 14,\r\n                \"gpspoints\": null,\r\n                \"opacity\": 56,\r\n                \"timetype\": \"wander\",\r\n                \"filterid\": 120495,\r\n                \"public\": true,\r\n                \"userdate\": \"2023-09-24\"\r\n            }\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/4/tracks/:trackid",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"4",
+						"tracks",
+						":trackid"
+					],
+					"variable": [
+						{
+							"key": "trackid",
+							"value": "854219158"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "track getmeta",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var template = `",
+							"<style type=\"text/css\">",
+							"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}",
+							"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}",
+							"    .tftable tr {background-color:#ffffff;}",
+							"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}",
+							"    .tftable tr:hover {background-color:#e0ffff;}",
+							"</style>",
+							"",
+							"<table class=\"tftable\" border=\"1\">",
+							"    <tr>",
+							"        <th>Type</th>",
+							"        <th>ID</th>",
+							"        <th>Geometry Type</th>",
+							"        <th>Coordinates</th>",
+							"        <th>Created At</th>",
+							"        <th>Modified At</th>",
+							"        <th>Public</th>",
+							"        <th>Owner</th>",
+							"        <th>Name</th>",
+							"        <th>User Date</th>",
+							"        <th>Imported</th>",
+							"        <th>Original ID</th>",
+							"        <th>Profile</th>",
+							"        <th>Via Points</th>",
+							"        <th>Filter Name</th>",
+							"        <th>Length</th>",
+							"        <th>Total Up</th>",
+							"        <th>Total Down</th>",
+							"        <th>Ele Min</th>",
+							"        <th>Ele Max</th>",
+							"        <th>Walking</th>",
+							"        <th>Winter Hiking</th>",
+							"        <th>Snowshoe Trekking</th>",
+							"        <th>Biking</th>",
+							"        <th>Elevation Models</th>",
+							"        <th>Height Diff</th>",
+							"        <th>GPS Points</th>",
+							"        <th>Opacity</th>",
+							"        <th>Time Type</th>",
+							"        <th>Velospeed</th>",
+							"        <th>Color</th>",
+							"        <th>Color RGB</th>",
+							"        <th>Filter ID</th>",
+							"    </tr>",
+							"    ",
+							"    <tr>",
+							"        <td>{{response.type}}</td>",
+							"        <td>{{response.id}}</td>",
+							"        <td>{{response.geometry.type}}</td>",
+							"        <td></td>",
+							"        <td>{{response.properties.created_at}}</td>",
+							"        <td>{{response.properties.modified_at}}</td>",
+							"        <td>{{response.properties.public}}</td>",
+							"        <td>{{response.properties.owner}}</td>",
+							"        <td>{{response.properties.name}}</td>",
+							"        <td>{{response.properties.userdate}}</td>",
+							"        <td>{{response.properties.imported}}</td>",
+							"        <td>{{response.properties.original_id}}</td>",
+							"        <td></td>",
+							"        <td></td>",
+							"        <td>{{response.properties.filter_name}}</td>",
+							"        <td>{{response.properties.meta.length}}</td>",
+							"        <td>{{response.properties.meta.totalup}}</td>",
+							"        <td>{{response.properties.meta.totaldown}}</td>",
+							"        <td>{{response.properties.meta.elemin}}</td>",
+							"        <td>{{response.properties.meta.elemax}}</td>",
+							"        <td>{{response.properties.meta.walking}}</td>",
+							"        <td>{{response.properties.meta.winter_hiking}}</td>",
+							"        <td>{{response.properties.meta.snowshoe_trekking}}</td>",
+							"        <td>{{response.properties.meta.biking}}</td>",
+							"        <td>{{response.properties.meta.elevationmodels}}</td>",
+							"        <td>{{response.properties.meta.heightdiff}}</td>",
+							"        <td>{{response.properties.gpspoints}}</td>",
+							"        <td>{{response.properties.opacity}}</td>",
+							"        <td>{{response.properties.timetype}}</td>",
+							"        <td>{{response.properties.velospeed}}</td>",
+							"        <td>{{response.properties.color}}</td>",
+							"        <td>{{response.properties.color_rgb}}</td>",
+							"        <td>{{response.properties.filterid}}</td>",
+							"    </tr>",
+							"</table>",
+							"`;",
+							"",
+							"function constructVisualizerPayload() {",
+							"    return {response: pm.response.json()}",
+							"}",
+							"",
+							"pm.visualizer.set(template, constructVisualizerPayload());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/4/tracks/:trackid/getmeta",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"4",
+						"tracks",
+						":trackid",
+						"getmeta"
+					],
+					"variable": [
+						{
+							"key": "trackid",
+							"value": "854219158"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "track saveparams",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var template = `",
+							"<style type=\"text/css\">",
+							"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}",
+							"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}",
+							"    .tftable tr {background-color:#ffffff;}",
+							"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}",
+							"    .tftable tr:hover {background-color:#e0ffff;}",
+							"</style>",
+							"",
+							"<table class=\"tftable\" border=\"1\">",
+							"    <tr>",
+							"        <th>Type</th>",
+							"        <th>ID</th>",
+							"        <th>Geometry Type</th>",
+							"        <th>Coordinates</th>",
+							"        <th>Created At</th>",
+							"        <th>Modified At</th>",
+							"        <th>Public</th>",
+							"        <th>Owner</th>",
+							"        <th>Name</th>",
+							"        <th>User Date</th>",
+							"        <th>Imported</th>",
+							"        <th>Original ID</th>",
+							"        <th>Profile</th>",
+							"        <th>Via Points</th>",
+							"        <th>Filter Name</th>",
+							"        <th>Length</th>",
+							"        <th>Total Up</th>",
+							"        <th>Total Down</th>",
+							"        <th>Ele Min</th>",
+							"        <th>Ele Max</th>",
+							"        <th>Walking</th>",
+							"        <th>Winter Hiking</th>",
+							"        <th>Snowshoe Trekking</th>",
+							"        <th>Biking</th>",
+							"        <th>Elevation Models</th>",
+							"        <th>Height Diff</th>",
+							"        <th>GPS Points</th>",
+							"        <th>Opacity</th>",
+							"        <th>Time Type</th>",
+							"        <th>Velospeed</th>",
+							"        <th>Color</th>",
+							"        <th>Color RGB</th>",
+							"        <th>Filter ID</th>",
+							"    </tr>",
+							"    ",
+							"    <tr>",
+							"        <td>{{response.type}}</td>",
+							"        <td>{{response.id}}</td>",
+							"        <td>{{response.geometry.type}}</td>",
+							"        <td></td>",
+							"        <td>{{response.properties.created_at}}</td>",
+							"        <td>{{response.properties.modified_at}}</td>",
+							"        <td>{{response.properties.public}}</td>",
+							"        <td>{{response.properties.owner}}</td>",
+							"        <td>{{response.properties.name}}</td>",
+							"        <td>{{response.properties.userdate}}</td>",
+							"        <td>{{response.properties.imported}}</td>",
+							"        <td>{{response.properties.original_id}}</td>",
+							"        <td></td>",
+							"        <td></td>",
+							"        <td>{{response.properties.filter_name}}</td>",
+							"        <td>{{response.properties.meta.length}}</td>",
+							"        <td>{{response.properties.meta.totalup}}</td>",
+							"        <td>{{response.properties.meta.totaldown}}</td>",
+							"        <td>{{response.properties.meta.elemin}}</td>",
+							"        <td>{{response.properties.meta.elemax}}</td>",
+							"        <td>{{response.properties.meta.walking}}</td>",
+							"        <td>{{response.properties.meta.winter_hiking}}</td>",
+							"        <td>{{response.properties.meta.snowshoe_trekking}}</td>",
+							"        <td>{{response.properties.meta.biking}}</td>",
+							"        <td>{{response.properties.meta.elevationmodels}}</td>",
+							"        <td>{{response.properties.meta.heightdiff}}</td>",
+							"        <td>{{response.properties.gpspoints}}</td>",
+							"        <td>{{response.properties.opacity}}</td>",
+							"        <td>{{response.properties.timetype}}</td>",
+							"        <td>{{response.properties.velospeed}}</td>",
+							"        <td>{{response.properties.color}}</td>",
+							"        <td>{{response.properties.color_rgb}}</td>",
+							"        <td>{{response.properties.filterid}}</td>",
+							"    </tr>",
+							"</table>",
+							"`;",
+							"",
+							"function constructVisualizerPayload() {",
+							"    return {response: pm.response.json()}",
+							"}",
+							"",
+							"pm.visualizer.set(template, constructVisualizerPayload());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"color\": \"red\",\r\n    \"gpspoints\": null,\r\n    \"opacity\": 56,\r\n    \"timetype\": \"wander\",\r\n    \"velospeed\": 14,\r\n    \"public\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/4/tracks/:trackid/saveparams",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"4",
+						"tracks",
+						":trackid",
+						"saveparams"
+					],
+					"variable": [
+						{
+							"key": "trackid",
+							"value": "854219158"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "track POIs",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var template = `",
+							"<style type=\"text/css\">",
+							"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}",
+							"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}",
+							"    .tftable tr {background-color:#ffffff;}",
+							"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}",
+							"    .tftable tr:hover {background-color:#e0ffff;}",
+							"</style>",
+							"",
+							"<table class=\"tftable\" border=\"1\">",
+							"    <tr>",
+							"        <th>Type</th>",
+							"        <th>ID</th>",
+							"        <th>Geometry Type</th>",
+							"        <th>Coordinates</th>",
+							"        <th>Created At</th>",
+							"        <th>Modified At</th>",
+							"        <th>Public</th>",
+							"        <th>Owner</th>",
+							"        <th>Name</th>",
+							"        <th>User Date</th>",
+							"        <th>Imported</th>",
+							"        <th>Original ID</th>",
+							"        <th>Profile</th>",
+							"        <th>Via Points</th>",
+							"        <th>Filter Name</th>",
+							"        <th>Length</th>",
+							"        <th>Total Up</th>",
+							"        <th>Total Down</th>",
+							"        <th>Ele Min</th>",
+							"        <th>Ele Max</th>",
+							"        <th>Walking</th>",
+							"        <th>Winter Hiking</th>",
+							"        <th>Snowshoe Trekking</th>",
+							"        <th>Biking</th>",
+							"        <th>Elevation Models</th>",
+							"        <th>Height Diff</th>",
+							"        <th>GPS Points</th>",
+							"        <th>Opacity</th>",
+							"        <th>Time Type</th>",
+							"        <th>Velospeed</th>",
+							"        <th>Color</th>",
+							"        <th>Color RGB</th>",
+							"        <th>Filter ID</th>",
+							"    </tr>",
+							"    ",
+							"    <tr>",
+							"        <td>{{response.type}}</td>",
+							"        <td>{{response.id}}</td>",
+							"        <td>{{response.geometry.type}}</td>",
+							"        <td></td>",
+							"        <td>{{response.properties.created_at}}</td>",
+							"        <td>{{response.properties.modified_at}}</td>",
+							"        <td>{{response.properties.public}}</td>",
+							"        <td>{{response.properties.owner}}</td>",
+							"        <td>{{response.properties.name}}</td>",
+							"        <td>{{response.properties.userdate}}</td>",
+							"        <td>{{response.properties.imported}}</td>",
+							"        <td>{{response.properties.original_id}}</td>",
+							"        <td></td>",
+							"        <td></td>",
+							"        <td>{{response.properties.filter_name}}</td>",
+							"        <td>{{response.properties.meta.length}}</td>",
+							"        <td>{{response.properties.meta.totalup}}</td>",
+							"        <td>{{response.properties.meta.totaldown}}</td>",
+							"        <td>{{response.properties.meta.elemin}}</td>",
+							"        <td>{{response.properties.meta.elemax}}</td>",
+							"        <td>{{response.properties.meta.walking}}</td>",
+							"        <td>{{response.properties.meta.winter_hiking}}</td>",
+							"        <td>{{response.properties.meta.snowshoe_trekking}}</td>",
+							"        <td>{{response.properties.meta.biking}}</td>",
+							"        <td>{{response.properties.meta.elevationmodels}}</td>",
+							"        <td>{{response.properties.meta.heightdiff}}</td>",
+							"        <td>{{response.properties.gpspoints}}</td>",
+							"        <td>{{response.properties.opacity}}</td>",
+							"        <td>{{response.properties.timetype}}</td>",
+							"        <td>{{response.properties.velospeed}}</td>",
+							"        <td>{{response.properties.color}}</td>",
+							"        <td>{{response.properties.color_rgb}}</td>",
+							"        <td>{{response.properties.filterid}}</td>",
+							"    </tr>",
+							"</table>",
+							"`;",
+							"",
+							"function constructVisualizerPayload() {",
+							"    return {response: pm.response.json()}",
+							"}",
+							"",
+							"pm.visualizer.set(template, constructVisualizerPayload());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/4/tracks/:trackid/pois",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"4",
+						"tracks",
+						":trackid",
+						"pois"
+					],
+					"variable": [
+						{
+							"key": "trackid",
+							"value": "854219158"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "usersettings",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{baseUrl}}/api/4/usersettings"
+			},
+			"response": []
+		},
+		{
+			"name": "track",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"type\": \"Feature\",\r\n        \"geometry\": {\r\n            \"type\": \"LineString\",\r\n            \"coordinates\": [\r\n                [\r\n                    574539.8902131211,\r\n                    242351.70956133408\r\n                ],\r\n                [\r\n                    574539.8536608347,\r\n                    242351.3294090018\r\n                ],\r\n                [\r\n                    574538.3371541428,\r\n                    242350.22412680634\r\n                ],\r\n                [\r\n                    574545.1446672222,\r\n                    242351.30661446854\r\n                ],\r\n                [\r\n                    574555.7410420295,\r\n                    242354.5964269925\r\n                ],\r\n                [\r\n                    574574.6757533221,\r\n                    242363.4094570308\r\n                ],\r\n                [\r\n                    574589.835912139,\r\n                    242373.35059404705\r\n                ],\r\n                [\r\n                    574605.775763857,\r\n                    242388.84750144524\r\n                ],\r\n                [\r\n                    574625.4947888516,\r\n                    242404.32822228764\r\n                ],\r\n                [\r\n                    574655.805138624,\r\n                    242421.98720536986\r\n                ],\r\n                [\r\n                    574666.4013251148,\r\n                    242425.2772164031\r\n                ],\r\n                [\r\n                    574677.7342900136,\r\n                    242424.11682280537\r\n                ],\r\n                [\r\n                    574689.0577345286,\r\n                    242420.73285866313\r\n                ],\r\n                [\r\n                    574731.2616755317,\r\n                    242391.6450020485\r\n                ],\r\n                [\r\n                    574747.1250838902,\r\n                    242389.3535532376\r\n                ],\r\n                [\r\n                    574768.3079636615,\r\n                    242393.71032808512\r\n                ],\r\n                [\r\n                    574787.998082952,\r\n                    242402.52081311384\r\n                ],\r\n                [\r\n                    574859.1853113202,\r\n                    242434.46017548235\r\n                ],\r\n                [\r\n                    574901.6024969781,\r\n                    242455.40436304372\r\n                ],\r\n                [\r\n                    574914.4707386888,\r\n                    242459.79698305333\r\n                ],\r\n                [\r\n                    574935.6390930945,\r\n                    242460.81896760914\r\n                ],\r\n                [\r\n                    574950.7418350382,\r\n                    242457.41947329228\r\n                ],\r\n                [\r\n                    574991.4633269672,\r\n                    242435.01065378697\r\n                ],\r\n                [\r\n                    575001.2705277402,\r\n                    242430.52188811637\r\n                ],\r\n                [\r\n                    575021.6690226351,\r\n                    242428.21198861627\r\n                ],\r\n                [\r\n                    575045.114405171,\r\n                    242431.44837162824\r\n                ],\r\n                [\r\n                    575139.0968288718,\r\n                    242492.20208529232\r\n                ],\r\n                [\r\n                    575159.5372303863,\r\n                    242499.89883010625\r\n                ],\r\n                [\r\n                    575189.0289615447,\r\n                    242503.11036489977\r\n                ],\r\n                [\r\n                    575204.1737302247,\r\n                    242509.7176868049\r\n                ],\r\n                [\r\n                    575298.9788292883,\r\n                    242587.14773144556\r\n                ],\r\n                [\r\n                    575358.1003446695,\r\n                    242626.92625289745\r\n                ],\r\n                [\r\n                    575391.4399064444,\r\n                    242646.79999475996\r\n                ],\r\n                [\r\n                    575501.2643737477,\r\n                    242701.9344106525\r\n                ],\r\n                [\r\n                    575530.031328803,\r\n                    242712.9333614909\r\n                ],\r\n                [\r\n                    575564.8400625717,\r\n                    242722.79564382148\r\n                ],\r\n                [\r\n                    575575.4443935454,\r\n                    242728.31087822566\r\n                ],\r\n                [\r\n                    575589.0857230801,\r\n                    242737.14903262485\r\n                ],\r\n                [\r\n                    575614.1375529048,\r\n                    242763.72917744133\r\n                ],\r\n                [\r\n                    575636.8896585796,\r\n                    242782.53619445136\r\n                ],\r\n                [\r\n                    575697.6603270615,\r\n                    242856.77763093423\r\n                ],\r\n                [\r\n                    575702.9828895596,\r\n                    242864.53845742135\r\n                ],\r\n                [\r\n                    575709.8673047364,\r\n                    242884.52285437216\r\n                ],\r\n                [\r\n                    575725.270913496,\r\n                    242954.5040219067\r\n                ],\r\n                [\r\n                    575733.6895426353,\r\n                    242980.0412331694\r\n                ],\r\n                [\r\n                    575740.541764348,\r\n                    242992.24308158745\r\n                ],\r\n                [\r\n                    575758.7533899321,\r\n                    243009.95740219692\r\n                ],\r\n                [\r\n                    575807.273180541,\r\n                    243046.44847954658\r\n                ],\r\n                [\r\n                    575867.8800678172,\r\n                    243081.77874936213\r\n                ],\r\n                [\r\n                    575907.2478573286,\r\n                    243098.29532445673\r\n                ],\r\n                [\r\n                    575970.0666204091,\r\n                    243120.27580837568\r\n                ],\r\n                [\r\n                    576010.1986554019,\r\n                    243139.01359333892\r\n                ],\r\n                [\r\n                    576058.6842969431,\r\n                    243167.7241464585\r\n                ],\r\n                [\r\n                    576072.3329018689,\r\n                    243178.7870222846\r\n                ],\r\n                [\r\n                    576087.5109604596,\r\n                    243194.29100886776\r\n                ],\r\n                [\r\n                    576135.3792695054,\r\n                    243257.4710404902\r\n                ],\r\n                [\r\n                    576149.8281559574,\r\n                    243279.64904157794\r\n                ],\r\n                [\r\n                    576154.4074750332,\r\n                    243290.7487329332\r\n                ],\r\n                [\r\n                    576159.0361370966,\r\n                    243314.07822643573\r\n                ],\r\n                [\r\n                    576155.4773719457,\r\n                    243368.57167557377\r\n                ],\r\n                [\r\n                    576157.0830702176,\r\n                    243391.91337565368\r\n                ],\r\n                [\r\n                    576162.4404480753,\r\n                    243408.56902677208\r\n                ],\r\n                [\r\n                    576169.2912965994,\r\n                    243420.77138477133\r\n                ],\r\n                [\r\n                    576188.2829392207,\r\n                    243445.1547981973\r\n                ],\r\n                [\r\n                    576197.3829229041,\r\n                    243452.90084973912\r\n                ],\r\n                [\r\n                    576212.5330926187,\r\n                    243461.7343657958\r\n                ],\r\n                [\r\n                    576301.8905175906,\r\n                    243506.9597399142\r\n                ],\r\n                [\r\n                    576335.2219652039,\r\n                    243526.83883759563\r\n                ],\r\n                [\r\n                    576350.3984490699,\r\n                    243542.34351184056\r\n                ],\r\n                [\r\n                    576367.1752304218,\r\n                    243580.07819348635\r\n                ],\r\n                [\r\n                    576377.0393668237,\r\n                    243590.04510179535\r\n                ],\r\n                [\r\n                    576385.3698474613,\r\n                    243594.45906488984\r\n                ],\r\n                [\r\n                    576400.5060481714,\r\n                    243599.957662275\r\n                ],\r\n                [\r\n                    576422.4390653698,\r\n                    243604.31734433115\r\n                ],\r\n                [\r\n                    576489.7139110132,\r\n                    243608.4964538346\r\n                ],\r\n                [\r\n                    576563.1004114181,\r\n                    243629.32935100427\r\n                ],\r\n                [\r\n                    576585.8153371194,\r\n                    243640.35744630682\r\n                ],\r\n                [\r\n                    576590.3715318587,\r\n                    243645.898479331\r\n                ],\r\n                [\r\n                    576595.6922215137,\r\n                    243653.66012377257\r\n                ],\r\n                [\r\n                    576598.0429955763,\r\n                    243674.77536395405\r\n                ],\r\n                [\r\n                    576590.7328722354,\r\n                    243737.06618560536\r\n                ],\r\n                [\r\n                    576590.0080380687,\r\n                    243744.85179086195\r\n                ],\r\n                [\r\n                    576592.3323609771,\r\n                    243759.29622484068\r\n                ],\r\n                [\r\n                    576605.324223475,\r\n                    243795.93477669093\r\n                ],\r\n                [\r\n                    576628.1748226633,\r\n                    243841.42889191926\r\n                ],\r\n                [\r\n                    576632.0059498148,\r\n                    243854.75556285624\r\n                ],\r\n                [\r\n                    576635.9118298182,\r\n                    243886.98286866053\r\n                ],\r\n                [\r\n                    576645.792591102,\r\n                    243901.39744028804\r\n                ],\r\n                [\r\n                    576657.1538617164,\r\n                    243908.023441493\r\n                ],\r\n                [\r\n                    576666.9906123603,\r\n                    243911.3200291815\r\n                ],\r\n                [\r\n                    576674.5472030743,\r\n                    243911.2901800482\r\n                ],\r\n                [\r\n                    576685.8689226117,\r\n                    243907.91001839103\r\n                ],\r\n                [\r\n                    576722.0485559796,\r\n                    243884.41910410716\r\n                ],\r\n                [\r\n                    576737.109255371,\r\n                    243871.01793249112\r\n                ],\r\n                [\r\n                    576764.2038141823,\r\n                    243843.11579485497\r\n                ],\r\n                [\r\n                    576778.5265304574,\r\n                    243834.164910385\r\n                ],\r\n                [\r\n                    576789.8528255601,\r\n                    243831.8967499823\r\n                ],\r\n                [\r\n                    576801.9522668596,\r\n                    243834.0728504908\r\n                ],\r\n                [\r\n                    576818.6075305953,\r\n                    243841.79018713732\r\n                ],\r\n                [\r\n                    576830.7505573243,\r\n                    243855.08436583317\r\n                ],\r\n                [\r\n                    577033.6462875778,\r\n                    244145.5885418685\r\n                ],\r\n                [\r\n                    577072.3905710643,\r\n                    244198.80534448847\r\n                ],\r\n                [\r\n                    577098.1981495804,\r\n                    244228.72434154508\r\n                ],\r\n                [\r\n                    577127.0279272662,\r\n                    244258.6317457973\r\n                ],\r\n                [\r\n                    577139.933633441,\r\n                    244274.14725310126\r\n                ],\r\n                [\r\n                    577171.0899809962,\r\n                    244319.61135014193\r\n                ],\r\n                [\r\n                    577183.9868483978,\r\n                    244332.90334870416\r\n                ],\r\n                [\r\n                    577199.893194262,\r\n                    244342.848294324\r\n                ],\r\n                [\r\n                    577233.1954961973,\r\n                    244357.1734692274\r\n                ],\r\n                [\r\n                    577263.4538310398,\r\n                    244365.9514494188\r\n                ],\r\n                [\r\n                    577285.3748159339,\r\n                    244368.0907273509\r\n                ],\r\n                [\r\n                    577306.5273659452,\r\n                    244366.89757871127\r\n                ],\r\n                [\r\n                    577410.723744852,\r\n                    244346.48529927587\r\n                ],\r\n                [\r\n                    577432.6319992627,\r\n                    244345.28971049195\r\n                ],\r\n                [\r\n                    577484.0300103582,\r\n                    244349.5407826287\r\n                ],\r\n                [\r\n                    577487.7656392073,\r\n                    244338.40833909455\r\n                ],\r\n                [\r\n                    577505.8577965283,\r\n                    244327.22119123314\r\n                ],\r\n                [\r\n                    577511.8730055409,\r\n                    244319.4155402382\r\n                ],\r\n                [\r\n                    577506.2449439621,\r\n                    244230.49139055016\r\n                ],\r\n                [\r\n                    577502.4456728629,\r\n                    244224.9467657499\r\n                ],\r\n                [\r\n                    577495.6323898819,\r\n                    244221.63726856318\r\n                ],\r\n                [\r\n                    577464.6689630704,\r\n                    244226.20263142954\r\n                ],\r\n                [\r\n                    577464.7360414001,\r\n                    244226.95290949376\r\n                ]\r\n            ]\r\n        },\r\n        \"properties\": {\r\n            \"color\": \"red\",\r\n            \"name\": \"230924 das ist ein neuer Track\",\r\n            \"via_points\": [\r\n                [\r\n                    574539.8902131211,\r\n                    242351.70956133408,\r\n                    812.2384948730469\r\n                ],\r\n                [\r\n                    577464.7360414001,\r\n                    244226.95290949376,\r\n                    737.9465026855469\r\n                ]\r\n            ],\r\n            \"meta\": {\r\n                \"length\": 4230.3,\r\n                \"totalup\": 75.19999999999993,\r\n                \"totaldown\": 149.5,\r\n                \"elemin\": 689.5,\r\n                \"elemax\": 812.6,\r\n                \"walking\": 64.53703089335629,\r\n                \"elevationmodels\": \"ElevationModel Snapped\",\r\n                \"biking\": 29.863893935855554,\r\n                \"heightdiff\": 0,\r\n                \"winter_hiking\": 80.7,\r\n                \"snowshoe_trekking\": 96.8\r\n            },\r\n            \"profile\": [\r\n                [\r\n                    574539.9,\r\n                    242351.7,\r\n                    812.2,\r\n                    0\r\n                ],\r\n                [\r\n                    574539.9,\r\n                    242351.3,\r\n                    812.2,\r\n                    0.4\r\n                ],\r\n                [\r\n                    574538.3,\r\n                    242350.2,\r\n                    812.6,\r\n                    2.3\r\n                ],\r\n                [\r\n                    574545.1,\r\n                    242351.3,\r\n                    812.1,\r\n                    9.2\r\n                ],\r\n                [\r\n                    574555.7,\r\n                    242354.6,\r\n                    810.7,\r\n                    20.2\r\n                ],\r\n                [\r\n                    574574.7,\r\n                    242363.4,\r\n                    806.5,\r\n                    41.1\r\n                ],\r\n                [\r\n                    574589.8,\r\n                    242373.4,\r\n                    803.5,\r\n                    59.3\r\n                ],\r\n                [\r\n                    574605.8,\r\n                    242388.8,\r\n                    799.9,\r\n                    81.5\r\n                ],\r\n                [\r\n                    574625.5,\r\n                    242404.3,\r\n                    795.3,\r\n                    106.6\r\n                ],\r\n                [\r\n                    574655.8,\r\n                    242422,\r\n                    788.5,\r\n                    141.6\r\n                ],\r\n                [\r\n                    574666.4,\r\n                    242425.3,\r\n                    786,\r\n                    152.7\r\n                ],\r\n                [\r\n                    574677.7,\r\n                    242424.1,\r\n                    783.9,\r\n                    164.1\r\n                ],\r\n                [\r\n                    574689.1,\r\n                    242420.7,\r\n                    782.1,\r\n                    175.9\r\n                ],\r\n                [\r\n                    574731.3,\r\n                    242391.6,\r\n                    776,\r\n                    227.2\r\n                ],\r\n                [\r\n                    574747.1,\r\n                    242389.4,\r\n                    773.3,\r\n                    243.2\r\n                ],\r\n                [\r\n                    574768.3,\r\n                    242393.7,\r\n                    769.5,\r\n                    264.9\r\n                ],\r\n                [\r\n                    574788,\r\n                    242402.5,\r\n                    765.3,\r\n                    286.4\r\n                ],\r\n                [\r\n                    574859.2,\r\n                    242434.5,\r\n                    750.3,\r\n                    364.5\r\n                ],\r\n                [\r\n                    574901.6,\r\n                    242455.4,\r\n                    742.7,\r\n                    411.8\r\n                ],\r\n                [\r\n                    574914.5,\r\n                    242459.8,\r\n                    741.3,\r\n                    425.4\r\n                ],\r\n                [\r\n                    574935.6,\r\n                    242460.8,\r\n                    738.4,\r\n                    446.6\r\n                ],\r\n                [\r\n                    574950.7,\r\n                    242457.4,\r\n                    736.4,\r\n                    462\r\n                ],\r\n                [\r\n                    574991.5,\r\n                    242435,\r\n                    732.1,\r\n                    508.5\r\n                ],\r\n                [\r\n                    575001.3,\r\n                    242430.5,\r\n                    731.5,\r\n                    519.3\r\n                ],\r\n                [\r\n                    575021.7,\r\n                    242428.2,\r\n                    730.4,\r\n                    539.8\r\n                ],\r\n                [\r\n                    575045.1,\r\n                    242431.4,\r\n                    728.3,\r\n                    563.5\r\n                ],\r\n                [\r\n                    575139.1,\r\n                    242492.2,\r\n                    724,\r\n                    675.4\r\n                ],\r\n                [\r\n                    575159.5,\r\n                    242499.9,\r\n                    723.1,\r\n                    697.2\r\n                ],\r\n                [\r\n                    575189,\r\n                    242503.1,\r\n                    721.3,\r\n                    726.9\r\n                ],\r\n                [\r\n                    575204.2,\r\n                    242509.7,\r\n                    720.2,\r\n                    743.4\r\n                ],\r\n                [\r\n                    575299,\r\n                    242587.1,\r\n                    711.9,\r\n                    865.8\r\n                ],\r\n                [\r\n                    575358.1,\r\n                    242626.9,\r\n                    707.7,\r\n                    937.1\r\n                ],\r\n                [\r\n                    575391.4,\r\n                    242646.8,\r\n                    705.5,\r\n                    975.9\r\n                ],\r\n                [\r\n                    575501.3,\r\n                    242701.9,\r\n                    698.5,\r\n                    1098.8\r\n                ],\r\n                [\r\n                    575530,\r\n                    242712.9,\r\n                    696.8,\r\n                    1129.6\r\n                ],\r\n                [\r\n                    575564.8,\r\n                    242722.8,\r\n                    694.7,\r\n                    1165.8\r\n                ],\r\n                [\r\n                    575575.4,\r\n                    242728.3,\r\n                    694,\r\n                    1177.7\r\n                ],\r\n                [\r\n                    575589.1,\r\n                    242737.1,\r\n                    692.8,\r\n                    1194\r\n                ],\r\n                [\r\n                    575614.1,\r\n                    242763.7,\r\n                    690.6,\r\n                    1230.5\r\n                ],\r\n                [\r\n                    575636.9,\r\n                    242782.5,\r\n                    689.5,\r\n                    1260\r\n                ],\r\n                [\r\n                    575697.7,\r\n                    242856.8,\r\n                    692.2,\r\n                    1356\r\n                ],\r\n                [\r\n                    575703,\r\n                    242864.5,\r\n                    692.4,\r\n                    1365.4\r\n                ],\r\n                [\r\n                    575709.9,\r\n                    242884.5,\r\n                    693,\r\n                    1386.5\r\n                ],\r\n                [\r\n                    575725.3,\r\n                    242954.5,\r\n                    695,\r\n                    1458.2\r\n                ],\r\n                [\r\n                    575733.7,\r\n                    242980,\r\n                    695.9,\r\n                    1485.1\r\n                ],\r\n                [\r\n                    575740.5,\r\n                    242992.2,\r\n                    696.5,\r\n                    1499.1\r\n                ],\r\n                [\r\n                    575758.8,\r\n                    243010,\r\n                    697.3,\r\n                    1524.5\r\n                ],\r\n                [\r\n                    575807.3,\r\n                    243046.4,\r\n                    699.1,\r\n                    1585.2\r\n                ],\r\n                [\r\n                    575867.9,\r\n                    243081.8,\r\n                    701.2,\r\n                    1655.3\r\n                ],\r\n                [\r\n                    575907.2,\r\n                    243098.3,\r\n                    702.4,\r\n                    1698\r\n                ],\r\n                [\r\n                    575970.1,\r\n                    243120.3,\r\n                    704.7,\r\n                    1764.6\r\n                ],\r\n                [\r\n                    576010.2,\r\n                    243139,\r\n                    705.9,\r\n                    1808.9\r\n                ],\r\n                [\r\n                    576058.7,\r\n                    243167.7,\r\n                    707.8,\r\n                    1865.2\r\n                ],\r\n                [\r\n                    576072.3,\r\n                    243178.8,\r\n                    708.2,\r\n                    1882.8\r\n                ],\r\n                [\r\n                    576087.5,\r\n                    243194.3,\r\n                    708.8,\r\n                    1904.5\r\n                ],\r\n                [\r\n                    576135.4,\r\n                    243257.5,\r\n                    710.8,\r\n                    1983.7\r\n                ],\r\n                [\r\n                    576149.8,\r\n                    243279.6,\r\n                    711.5,\r\n                    2010.2\r\n                ],\r\n                [\r\n                    576154.4,\r\n                    243290.7,\r\n                    711.8,\r\n                    2022.2\r\n                ],\r\n                [\r\n                    576159,\r\n                    243314.1,\r\n                    712.7,\r\n                    2046\r\n                ],\r\n                [\r\n                    576155.5,\r\n                    243368.6,\r\n                    714.9,\r\n                    2100.6\r\n                ],\r\n                [\r\n                    576157.1,\r\n                    243391.9,\r\n                    715.5,\r\n                    2124\r\n                ],\r\n                [\r\n                    576162.4,\r\n                    243408.6,\r\n                    716,\r\n                    2141.5\r\n                ],\r\n                [\r\n                    576169.3,\r\n                    243420.8,\r\n                    716.5,\r\n                    2155.5\r\n                ],\r\n                [\r\n                    576188.3,\r\n                    243445.2,\r\n                    717.4,\r\n                    2186.4\r\n                ],\r\n                [\r\n                    576197.4,\r\n                    243452.9,\r\n                    717.9,\r\n                    2198.4\r\n                ],\r\n                [\r\n                    576212.5,\r\n                    243461.7,\r\n                    718.3,\r\n                    2215.9\r\n                ],\r\n                [\r\n                    576301.9,\r\n                    243507,\r\n                    720.3,\r\n                    2316\r\n                ],\r\n                [\r\n                    576335.2,\r\n                    243526.8,\r\n                    721.2,\r\n                    2354.9\r\n                ],\r\n                [\r\n                    576350.4,\r\n                    243542.3,\r\n                    722.1,\r\n                    2376.5\r\n                ],\r\n                [\r\n                    576367.2,\r\n                    243580.1,\r\n                    723.4,\r\n                    2417.8\r\n                ],\r\n                [\r\n                    576377,\r\n                    243590,\r\n                    723.8,\r\n                    2431.9\r\n                ],\r\n                [\r\n                    576385.4,\r\n                    243594.5,\r\n                    724.1,\r\n                    2441.3\r\n                ],\r\n                [\r\n                    576400.5,\r\n                    243600,\r\n                    724.7,\r\n                    2457.4\r\n                ],\r\n                [\r\n                    576422.4,\r\n                    243604.3,\r\n                    725.2,\r\n                    2479.8\r\n                ],\r\n                [\r\n                    576489.7,\r\n                    243608.5,\r\n                    727.3,\r\n                    2547.2\r\n                ],\r\n                [\r\n                    576563.1,\r\n                    243629.3,\r\n                    729.9,\r\n                    2623.5\r\n                ],\r\n                [\r\n                    576585.8,\r\n                    243640.4,\r\n                    730.6,\r\n                    2648.7\r\n                ],\r\n                [\r\n                    576590.4,\r\n                    243645.9,\r\n                    730.8,\r\n                    2655.9\r\n                ],\r\n                [\r\n                    576595.7,\r\n                    243653.7,\r\n                    731.2,\r\n                    2665.3\r\n                ],\r\n                [\r\n                    576598,\r\n                    243674.8,\r\n                    731.9,\r\n                    2686.5\r\n                ],\r\n                [\r\n                    576590.7,\r\n                    243737.1,\r\n                    734.2,\r\n                    2749.3\r\n                ],\r\n                [\r\n                    576590,\r\n                    243744.9,\r\n                    734.5,\r\n                    2757.1\r\n                ],\r\n                [\r\n                    576592.3,\r\n                    243759.3,\r\n                    735,\r\n                    2771.7\r\n                ],\r\n                [\r\n                    576605.3,\r\n                    243795.9,\r\n                    735.9,\r\n                    2810.6\r\n                ],\r\n                [\r\n                    576628.2,\r\n                    243841.4,\r\n                    737.2,\r\n                    2861.5\r\n                ],\r\n                [\r\n                    576632,\r\n                    243854.8,\r\n                    737.5,\r\n                    2875.4\r\n                ],\r\n                [\r\n                    576635.9,\r\n                    243887,\r\n                    738.3,\r\n                    2907.8\r\n                ],\r\n                [\r\n                    576645.8,\r\n                    243901.4,\r\n                    738.7,\r\n                    2925.3\r\n                ],\r\n                [\r\n                    576657.2,\r\n                    243908,\r\n                    739.1,\r\n                    2938.4\r\n                ],\r\n                [\r\n                    576667,\r\n                    243911.3,\r\n                    739.6,\r\n                    2948.8\r\n                ],\r\n                [\r\n                    576674.5,\r\n                    243911.3,\r\n                    740,\r\n                    2956.4\r\n                ],\r\n                [\r\n                    576685.9,\r\n                    243907.9,\r\n                    740.6,\r\n                    2968.2\r\n                ],\r\n                [\r\n                    576722,\r\n                    243884.4,\r\n                    741.6,\r\n                    3011.3\r\n                ],\r\n                [\r\n                    576737.1,\r\n                    243871,\r\n                    742,\r\n                    3031.5\r\n                ],\r\n                [\r\n                    576764.2,\r\n                    243843.1,\r\n                    743.3,\r\n                    3070.4\r\n                ],\r\n                [\r\n                    576778.5,\r\n                    243834.2,\r\n                    743.7,\r\n                    3087.3\r\n                ],\r\n                [\r\n                    576789.9,\r\n                    243831.9,\r\n                    743.9,\r\n                    3098.8\r\n                ],\r\n                [\r\n                    576802,\r\n                    243834.1,\r\n                    744,\r\n                    3111.1\r\n                ],\r\n                [\r\n                    576818.6,\r\n                    243841.8,\r\n                    744.3,\r\n                    3129.5\r\n                ],\r\n                [\r\n                    576830.8,\r\n                    243855.1,\r\n                    744.4,\r\n                    3147.5\r\n                ],\r\n                [\r\n                    577033.6,\r\n                    244145.6,\r\n                    743.6,\r\n                    3501.8\r\n                ],\r\n                [\r\n                    577072.4,\r\n                    244198.8,\r\n                    743.9,\r\n                    3567.6\r\n                ],\r\n                [\r\n                    577098.2,\r\n                    244228.7,\r\n                    744,\r\n                    3607.2\r\n                ],\r\n                [\r\n                    577127,\r\n                    244258.6,\r\n                    742.6,\r\n                    3648.7\r\n                ],\r\n                [\r\n                    577139.9,\r\n                    244274.1,\r\n                    741.5,\r\n                    3668.9\r\n                ],\r\n                [\r\n                    577171.1,\r\n                    244319.6,\r\n                    738.4,\r\n                    3724\r\n                ],\r\n                [\r\n                    577184,\r\n                    244332.9,\r\n                    737,\r\n                    3742.5\r\n                ],\r\n                [\r\n                    577199.9,\r\n                    244342.8,\r\n                    735.9,\r\n                    3761.3\r\n                ],\r\n                [\r\n                    577233.2,\r\n                    244357.2,\r\n                    733.7,\r\n                    3797.5\r\n                ],\r\n                [\r\n                    577263.5,\r\n                    244366,\r\n                    731.7,\r\n                    3829\r\n                ],\r\n                [\r\n                    577285.4,\r\n                    244368.1,\r\n                    730.3,\r\n                    3851.1\r\n                ],\r\n                [\r\n                    577306.5,\r\n                    244366.9,\r\n                    729.2,\r\n                    3872.2\r\n                ],\r\n                [\r\n                    577410.7,\r\n                    244346.5,\r\n                    722.8,\r\n                    3978.4\r\n                ],\r\n                [\r\n                    577432.6,\r\n                    244345.3,\r\n                    721.6,\r\n                    4000.4\r\n                ],\r\n                [\r\n                    577484,\r\n                    244349.5,\r\n                    718.4,\r\n                    4051.9\r\n                ],\r\n                [\r\n                    577487.8,\r\n                    244338.4,\r\n                    719.1,\r\n                    4063.7\r\n                ],\r\n                [\r\n                    577505.9,\r\n                    244327.2,\r\n                    720.7,\r\n                    4084.9\r\n                ],\r\n                [\r\n                    577511.9,\r\n                    244319.4,\r\n                    721.7,\r\n                    4094.8\r\n                ],\r\n                [\r\n                    577506.2,\r\n                    244230.5,\r\n                    735.3,\r\n                    4183.9\r\n                ],\r\n                [\r\n                    577502.4,\r\n                    244224.9,\r\n                    736.2,\r\n                    4190.6\r\n                ],\r\n                [\r\n                    577495.6,\r\n                    244221.6,\r\n                    736.9,\r\n                    4198.2\r\n                ],\r\n                [\r\n                    577464.7,\r\n                    244226.2,\r\n                    737.9,\r\n                    4229.5\r\n                ],\r\n                [\r\n                    577464.7,\r\n                    244227,\r\n                    737.9,\r\n                    4230.3\r\n                ]\r\n            ],\r\n            \"velospeed\": 14,\r\n            \"gpspoints\": null,\r\n            \"opacity\": 100,\r\n            \"timetype\": \"wander\",\r\n            \"filterid\": -1,\r\n            \"public\": true,\r\n            \"userdate\": \"2023-09-24\"\r\n        }\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseUrl}}/api/4/tracks"
+			},
+			"response": []
+		},
+		{
+			"name": "photo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/4/photo?bbox=563360,237360,573600,247600",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"4",
+						"photo"
+					],
+					"query": [
+						{
+							"key": "bbox",
+							"value": "563360,237360,573600,247600"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
