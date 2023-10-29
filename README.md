@@ -7,4 +7,4 @@ With a paid [Switzerland Mobility Plus](https://schweizmobil.ch/en/switzerlandmo
 
 I converted the postman file into OpenAPI using https://github.com/DefCon-007/postman-to-openapi-online. Viewing the result with swagger works more or less (the postman references to the user, password and baseUrl variables are not resolved; baseUrl is https://map.schweizmobil.ch).
 
-Please note that I am not affiliated in any way with schweizmobil.ch foundation and this repo is not an official publication of schweizmobil.ch. I created this repo for my training and because I was unable to find online documentation of this API.
+Please note that I am not affiliated in any way with the schweizmobil.ch foundation and this repo is not an official publication of schweizmobil.ch. I created this repo for my training and because I was unable to find online documentation of this API.
